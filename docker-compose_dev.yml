@@ -1,0 +1,25 @@
+version: "3"
+#networks:
+#  traefik_default:
+#    name: traefik_default
+
+services:
+  highrescloudrgb:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: always
+    container_name: highrescloudrgb
+    environment:
+      FLASK_DEBUG: 1
+      PYTHONUNBUFFERED: 1
+    ports:
+      - "8056:8056"
+    volumes:
+      - ./:/api
+      - /cephfs/installers/ml_models/high-res-cloud-rgb:/model
+#    labels:
+#      - "traefik.http.routers.highrescloudrgb.rule=Host(`highrescloudrgb_ml.orbitaleye.nl`)"
+#    networks:
+#      - traefik_default
+
